@@ -29,6 +29,12 @@
       "groupName": "Python dependencies"
     },
     {
+      "description": "Group Go module updates",
+      "matchManagers": ["gomod"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "Go modules"
+    },
+    {
       "description": "Automerge non-breaking updates after CI succeeds",
       "matchUpdateTypes": ["patch", "minor", "digest"],
       "automerge": true
