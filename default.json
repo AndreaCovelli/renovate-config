@@ -1,0 +1,38 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices",
+    "helpers:pinGitHubActionDigests"
+  ],
+  "dependencyDashboard": true,
+  "minimumReleaseAge": "7 days",
+  "platformAutomerge": false,
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "description": "Group Mise tool updates",
+      "matchManagers": ["mise"],
+      "groupName": "Mise tools"
+    },
+    {
+      "description": "Automerge non-breaking updates after CI succeeds",
+      "matchUpdateTypes": ["patch", "minor", "digest"],
+      "automerge": true
+    },
+    {
+      "description": "Require manual review for all other update types",
+      "matchUpdateTypes": [
+        "major",
+        "pin",
+        "pinDigest",
+        "lockFileMaintenance",
+        "rollback",
+        "bump",
+        "replacement"
+      ],
+      "automerge": false
+    }
+  ]
+}
