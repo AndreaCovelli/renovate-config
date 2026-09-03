@@ -6,7 +6,7 @@
   ],
   "dependencyDashboard": true,
   "minimumReleaseAge": "7 days",
-  "platformAutomerge": false,
+  "platformAutomerge": true,
   "lockFileMaintenance": {
     "enabled": true
   },
