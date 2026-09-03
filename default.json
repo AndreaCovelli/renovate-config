@@ -17,6 +17,18 @@
       "groupName": "Mise tools"
     },
     {
+      "description": "Group GitHub Action updates and digest pins",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch", "digest", "pinDigest"],
+      "groupName": "GitHub Actions"
+    },
+    {
+      "description": "Group Python package updates",
+      "matchManagers": ["pep621"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "Python dependencies"
+    },
+    {
       "description": "Automerge non-breaking updates after CI succeeds",
       "matchUpdateTypes": ["patch", "minor", "digest"],
       "automerge": true
