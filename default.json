@@ -2,55 +2,49 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:best-practices",
-    "helpers:pinGitHubActionDigests"
+    "security:minimumReleaseAgePypi"
   ],
-  "dependencyDashboard": true,
-  "minimumReleaseAge": "7 days",
-  "platformAutomerge": true,
-  "lockFileMaintenance": {
-    "enabled": true
-  },
+  "minimumReleaseAgeBehaviour": "timestamp-optional",
   "packageRules": [
     {
-      "description": "Group Mise tool updates",
+      "description": "Group non-breaking mise tool updates",
       "matchManagers": ["mise"],
-      "groupName": "Mise tools"
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "matchJsonata": ["isBreaking != true"],
+      "groupName": "mise tools"
     },
     {
-      "description": "Group GitHub Action updates and digest pins",
+      "description": "Group non-breaking GitHub Actions updates",
       "matchManagers": ["github-actions"],
-      "matchUpdateTypes": ["minor", "patch", "digest", "pinDigest"],
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "matchJsonata": ["isBreaking != true"],
       "groupName": "GitHub Actions"
     },
     {
-      "description": "Group Python package updates",
+      "description": "Group non-breaking Python package updates",
       "matchManagers": ["pep621"],
       "matchUpdateTypes": ["minor", "patch"],
+      "matchJsonata": ["isBreaking != true"],
       "groupName": "Python dependencies"
     },
     {
-      "description": "Group Go module updates",
+      "description": "Group non-breaking Go module updates",
       "matchManagers": ["gomod"],
       "matchUpdateTypes": ["minor", "patch"],
+      "matchJsonata": ["isBreaking != true"],
       "groupName": "Go modules"
     },
     {
-      "description": "Automerge non-breaking updates after CI succeeds",
-      "matchUpdateTypes": ["patch", "minor", "digest"],
-      "automerge": true
+      "description": "Pin digests without waiting for the release-age cooldown",
+      "matchUpdateTypes": ["pinDigest"],
+      "minimumReleaseAge": null
     },
     {
-      "description": "Require manual review for all other update types",
-      "matchUpdateTypes": [
-        "major",
-        "pin",
-        "pinDigest",
-        "lockFileMaintenance",
-        "rollback",
-        "bump",
-        "replacement"
-      ],
-      "automerge": false
+      "description": "Automerge non-breaking updates after CI and a 14-day cooldown",
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "matchJsonata": ["isBreaking != true"],
+      "minimumReleaseAge": "14 days",
+      "automerge": true
     }
   ]
 }
