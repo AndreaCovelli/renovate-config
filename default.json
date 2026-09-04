@@ -43,7 +43,7 @@
       "description": "Automerge non-breaking updates after CI and a 14-day cooldown",
       "matchUpdateTypes": ["minor", "patch", "digest"],
       "matchJsonata": ["isBreaking != true"],
-      "minimumReleaseAge": "14 days",
+      "minimumReleaseAge": "7 days",
       "automerge": true
     }
   ]
