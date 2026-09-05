@@ -35,6 +35,11 @@
       "groupName": "Go modules"
     },
     {
+      "description": "Tidy Go modules after dependency updates",
+      "matchManagers": ["gomod"],
+      "postUpdateOptions": ["gomodTidy"]
+    },
+    {
       "description": "Pin digests without waiting for the release-age cooldown",
       "matchUpdateTypes": ["pinDigest"],
       "minimumReleaseAge": null
