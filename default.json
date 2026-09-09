@@ -5,6 +5,8 @@
     "security:minimumReleaseAgePypi"
   ],
   "minimumReleaseAgeBehaviour": "timestamp-optional",
+  "timezone": "Europe/Rome",
+  "schedule": ["every 2 weeks on monday"],
   "packageRules": [
     {
       "description": "Group mise tool updates",
