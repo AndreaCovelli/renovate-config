@@ -4,6 +4,7 @@
     "config:best-practices",
     "security:minimumReleaseAgePypi"
   ],
+  "automergeStrategy": "squash",
   "minimumReleaseAgeBehaviour": "timestamp-optional",
   "timezone": "Europe/Rome",
   "schedule": ["every 2 weeks on monday"],
