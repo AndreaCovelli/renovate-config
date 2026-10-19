@@ -8,6 +8,7 @@
   "minimumReleaseAgeBehaviour": "timestamp-optional",
   "timezone": "Europe/Rome",
   "schedule": ["every 2 weeks on monday"],
+  "postUpdateOptions": ["gomodTidy"],
   "packageRules": [
     {
       "description": "Batch updates across managers into one PR; major updates still get their own PR. Repositories give updates that need manual review a separate group so they do not block automerge for the rest",
@@ -19,11 +20,6 @@
       "matchUpdateTypes": ["minor", "patch"],
       "matchJsonata": ["isBreaking = true"],
       "groupName": "breaking non-major dependencies"
-    },
-    {
-      "description": "Tidy Go modules after dependency updates",
-      "matchManagers": ["gomod"],
-      "postUpdateOptions": ["gomodTidy"]
     },
     {
       "description": "Pin digests without waiting for the release-age cooldown and automerge them: the referenced version does not change",
