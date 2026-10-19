@@ -15,19 +15,26 @@
       "groupName": "all dependencies"
     },
     {
+      "description": "Keep breaking non-major updates, such as 0.x minor bumps, out of the automerged group so they do not hold it back",
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchJsonata": ["isBreaking = true"],
+      "groupName": "breaking non-major dependencies"
+    },
+    {
       "description": "Tidy Go modules after dependency updates",
       "matchManagers": ["gomod"],
       "postUpdateOptions": ["gomodTidy"]
     },
     {
-      "description": "Pin digests without waiting for the release-age cooldown",
+      "description": "Pin digests without waiting for the release-age cooldown and automerge them: the referenced version does not change",
       "matchUpdateTypes": ["pinDigest"],
-      "minimumReleaseAge": null
+      "minimumReleaseAge": null,
+      "automerge": true
     },
     {
-      "description": "Automerge non-breaking updates after CI and cooldown",
+      "description": "Automerge non-breaking updates after CI and cooldown. Digest updates have no isBreaking value, and a JSONata comparison with a missing value is false, so test for isBreaking = true instead of != true",
       "matchUpdateTypes": ["minor", "patch", "digest"],
-      "matchJsonata": ["isBreaking != true"],
+      "matchJsonata": ["$not(isBreaking = true)"],
       "minimumReleaseAge": "7 days",
       "automerge": true
     }
