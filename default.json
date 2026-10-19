@@ -10,24 +10,9 @@
   "schedule": ["every 2 weeks on monday"],
   "packageRules": [
     {
-      "description": "Group mise tool updates",
-      "matchManagers": ["mise"],
-      "groupName": "mise tools"
-    },
-    {
-      "description": "Group GitHub Actions updates",
-      "matchManagers": ["github-actions"],
-      "groupName": "GitHub Actions"
-    },
-    {
-      "description": "Group Python package updates",
-      "matchManagers": ["pep621"],
-      "groupName": "Python dependencies"
-    },
-    {
-      "description": "Group Go module updates",
-      "matchManagers": ["gomod"],
-      "groupName": "Go modules"
+      "description": "Batch updates across managers into one PR; major updates still get their own PR. Repositories give updates that need manual review a separate group so they do not block automerge for the rest",
+      "matchPackageNames": ["*"],
+      "groupName": "all dependencies"
     },
     {
       "description": "Tidy Go modules after dependency updates",
