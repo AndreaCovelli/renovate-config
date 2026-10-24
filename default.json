@@ -7,7 +7,10 @@
   "automergeStrategy": "squash",
   "minimumReleaseAgeBehaviour": "timestamp-optional",
   "timezone": "Europe/Rome",
-  "schedule": ["every 2 weeks on monday"],
+  "schedule": ["* * 1-7 * 0"],
+  "lockFileMaintenance": {
+    "schedule": ["* * 1-7 * 0"]
+  },
   "postUpdateOptions": ["gomodTidy"],
   "packageRules": [
     {
