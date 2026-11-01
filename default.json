@@ -8,8 +8,10 @@
   "minimumReleaseAgeBehaviour": "timestamp-optional",
   "timezone": "Europe/Rome",
   "schedule": ["* * 1-7 * 0"],
+  "prHourlyLimit": 0,
   "lockFileMaintenance": {
-    "schedule": ["* * 1-7 * 0"]
+    "schedule": ["* * 1-7 * 0"],
+    "automerge": true
   },
   "postUpdateOptions": ["gomodTidy"],
   "packageRules": [
@@ -34,6 +36,14 @@
       "description": "Automerge non-breaking updates after CI and cooldown. Digest updates have no isBreaking value, and a JSONata comparison with a missing value is false, so test for isBreaking = true instead of != true",
       "matchUpdateTypes": ["minor", "patch", "digest"],
       "matchJsonata": ["$not(isBreaking = true)"],
+      "minimumReleaseAge": "7 days",
+      "automerge": true
+    },
+    {
+      "description": "These 0.x tools ship routine releases as minor and patch bumps, which Renovate marks as breaking. Keep them in the automerged group; majors still get their own PR",
+      "matchPackageNames": ["uv", "astral-sh/uv", "ghcr.io/astral-sh/uv", "markdownlint-cli2", "DavidAnson/markdownlint-cli2", "google.golang.org/api"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "all dependencies",
       "minimumReleaseAge": "7 days",
       "automerge": true
     }
