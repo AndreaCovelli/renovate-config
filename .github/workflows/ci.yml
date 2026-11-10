@@ -14,26 +14,19 @@ permissions:
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  check:
-    name: Check
-    uses: AndreaCovelli/repo-baseline/.github/workflows/check.yml@a3cd314a40868370e41af02ecf02af60df5614ee # v1.0.1
-    permissions:
-      contents: read
-      pull-requests: read
-    with:
-      timeout-minutes: 10
-
   validate:
     name: Validate
-    needs: [check]
-    if: always()
     runs-on: ubuntu-26.04
-    timeout-minutes: 5
+    timeout-minutes: 10
+    permissions:
+      checks: read
+      contents: read
+      pull-requests: read
     steps:
-      - name: Check CI results
-        env:
-          NEEDS: ${{ toJSON(needs) }}
-        run: jq -e 'all(.[]; .result == "success" or .result == "skipped")' <<<"$NEEDS"
+      - name: Check
+        id: check
+        uses: AndreaCovelli/repo-baseline/.github/actions/check@a9310352317e707bffc0e031caf29d3c48d7eb97 # v1.1.0
+
